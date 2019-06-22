@@ -1048,26 +1048,14 @@ function removeGUI() {
 }
 
 function addCommands() {
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-        document.getElementById("bottomright").innerHTML = "<button disabled class='button'>CANNON CONTROLS" +
-            "<div class='smalltext'>Swipe up - tilt up</div>" +
-            "<div class='smalltext'>Swipe down - tilt down</div>" +
-            "<div class='smalltext'>Switch on lateral move and swipe left - move left</div>" +
-            "<div class='smalltext'>Switch on lateral move and swipe right - move right</div>" +
-            "<div class='smalltext'>Switch on lateral tilt and swipe left - tilt left</div>" +
-            "<div class='smalltext'>Switch on lateral tilt and swipe right - tilt right</div>" +
-            "<div class='smalltext'>Long press - launch</div></button>";
-    }
-    else{
-        document.getElementById("bottomright").innerHTML = "<button disabled class='button'>CANNON CONTROLS" +
-            "<div class='smalltext'>W - tilt up</div>" +
-            "<div class='smalltext'>S - tilt down</div>" +
-            "<div class='smalltext'>A - move left</div>" +
-            "<div class='smalltext'>D - move right</div>" +
-            "<div class='smalltext'>Q - tilt left</div>" +
-            "<div class='smalltext'>E - tilt right</div>" +
-            "<div class='smalltext'>SPACE - launch</div></button>";
-    }
+    document.getElementById("bottomright").innerHTML = "<button disabled class='button'>PC OR PHONE CANNON CONTROLS" +
+        "<div class='smalltext'>W or Swipe up - tilt up</div>" +
+        "<div class='smalltext'>S or Swipe down - tilt down</div>" +
+        "<div class='smalltext'>A or Switch on lateral move and swipe left - move left</div>" +
+        "<div class='smalltext'>D or Switch on lateral move and swipe right - move right</div>" +
+        "<div class='smalltext'>Q or Switch on lateral tilt and swipe left - tilt left</div>" +
+        "<div class='smalltext'>E or Switch on lateral tilt and swipe right - tilt right</div>" +
+        "<div class='smalltext'>SPACE or Long press - launch</div></button>";
 }
 
 /*function addOptions() {
