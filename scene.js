@@ -1639,7 +1639,7 @@ function render() {
     }
 
 
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+    /*if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
         if (cameraFollowsBall) {
             camera.position.set(
                 ballPosX,
@@ -1648,8 +1648,8 @@ function render() {
             );
         }
 
-    }
-    else{
+    }*/
+    //else{
         if (cameraFollowsBall) {
             camera.position.set(
                 ballPosX,
@@ -1657,7 +1657,7 @@ function render() {
                 camera.position.z < LANE_SIZE_Z - 300 ? ball.position.z + CAMERA_START_Z + 7.5 : LANE_SIZE_Z - 300
             );
         }
-    }
+    //}
 
 	remover.__dirtyPosition = true;
 	remover.__dirtyRotation = true;
