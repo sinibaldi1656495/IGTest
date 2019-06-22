@@ -76,6 +76,8 @@ const BALL_WEIGHT = 7;
 const BALL_IMPULSE_Z = 2000;
 
 const ANGLE_STEP_TOUCH = 0.001;
+const MAX_X_ANGLE_CANNON_TOUCH = Math.PI/24;
+const MIN_X_ANGLE_CANNON_TOUCH = -Math.PI/24;
 
 const REMOVER_SMALL_SIZE_X = GUTTER_SIZE_X / 2;
 const REMOVER_SMALL_WIDTH = 1;
@@ -122,6 +124,7 @@ var angleXcannon = 0, angleYcannon = 0;
 var ballPosX;
 
 var listeningTouch = true;
+var tiltMoveSwitch = true;
 
 function initScene() {
 	window.addEventListener( 'resize', onWindowResize, false );
@@ -1027,7 +1030,7 @@ function initGUI() {
 	document.getElementById("topleft").innerHTML = "<input id='buttontopleft' class='button clickable smalltext centertext' type='button' value='Enable/disable music' onclick='switchMusic()'></input>";
 	document.getElementById("topright").innerHTML = "<button id='buttontopright' class='button clickable' onclick='addScore();'>Score: " + scoreTotal + "<div class='smalltext centertext'>Click for details</div></button>";
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-        document.getElementById("bottomleft").innerHTML = "<input id='switchCamera' class='button clickable centertext' type='button' value='Fire test4' onclick='fireBall()'></input>";
+        document.getElementById("bottomleft").innerHTML = "<input id='switchCamera' class='button clickable smalltext centertext' type='button' value='Switch lateral tilt/move cannon' onclick='switchLTMC()'></input>";
     }
     else{
         document.getElementById("bottomleft").innerHTML = "<input id='switchCamera' class='button clickable smalltext centertext' type='button' value='Enable/disable free camera' onclick='switchCameraControl()'></input>";
@@ -1366,42 +1369,46 @@ function enableTouch(){
                     camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
                 }
                 break;
-            /*case 65: // A
-                if (c0.position.y >= -CROOT1_LENGTH/2 + C0_RADIUS_DOWN) {
-                    c0.translateX(CANNON_X_STEP);
-                    croot1.updateMatrixWorld();
-                    camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
-                    camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
-                }
 
-                break;
-            case 68: // D
-                if (c0.position.y <= CROOT1_LENGTH/2 - C0_RADIUS_DOWN) {
-                    c0.translateX(-CANNON_X_STEP);
-                    croot1.updateMatrixWorld();
-                    camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
-                    camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
-                }
-
-                break;*/
             case "panleft":
-                if (angleXcannon <= MAX_X_ANGLE_CANNON) {
-                    c2.rotateY(ANGLE_STEP_TOUCH);
-                    angleXcannon += ANGLE_STEP_TOUCH;
-                    croot1.updateMatrixWorld();
-                    camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
-                    camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
+                if(tiltMoveSwitch){
+                    if (angleXcannon <= MAX_X_ANGLE_CANNON_TOUCH) {
+                        c2.rotateY(ANGLE_STEP_TOUCH);
+                        angleXcannon += ANGLE_STEP_TOUCH;
+                        croot1.updateMatrixWorld();
+                        camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
+                        camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
+                    }
+                }
+                else{
+                    if (c0.position.y >= -CROOT1_LENGTH/2 + C0_RADIUS_DOWN) {
+                        c0.translateX(CANNON_X_STEP);
+                        croot1.updateMatrixWorld();
+                        camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
+                        camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
+                    }
                 }
 
                 break;
             case "panright":
-                if (angleXcannon >= MIN_X_ANGLE_CANNON) {
-                    c2.rotateY(-ANGLE_STEP_TOUCH);
-                    angleXcannon -= ANGLE_STEP_TOUCH;
-                    croot1.updateMatrixWorld();
-                    camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
-                    camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
+                if(tiltMoveSwitch){
+                    if (angleXcannon >= MIN_X_ANGLE_CANNON_TOUCH) {
+                        c2.rotateY(-ANGLE_STEP_TOUCH);
+                        angleXcannon -= ANGLE_STEP_TOUCH;
+                        croot1.updateMatrixWorld();
+                        camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
+                        camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
+                    }
                 }
+                else{
+                    if (c0.position.y <= CROOT1_LENGTH/2 - C0_RADIUS_DOWN) {
+                        c0.translateX(-CANNON_X_STEP);
+                        croot1.updateMatrixWorld();
+                        camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
+                        camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
+                    }
+                }
+
                 break;
             case "press":
 
@@ -1438,36 +1445,8 @@ function enableTouch(){
     });
 }
 
-function fireBall(){
-
-    listeningTouch= false;
-
-    croot1.updateMatrixWorld();
-    camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
-    camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
-    //document.removeEventListener("keydown", onDocumentKeyDown);
-    //hm-manager-options="{'touchAction':'none'}";
-
-
-
-    scene.remove(ballStatic);
-    document.getElementById("shoot").play();
-
-    for (var i = 0; i < 10; i++) {
-        pins[i].setAngularFactor(new THREE.Vector3(1, 1, 1));
-        pins[i].setLinearFactor(new THREE.Vector3(1, 1, 1));
-    }
-
-    croot1.updateMatrixWorld();
-
-    ball.position.set(cball.getWorldPosition().x, cball.getWorldPosition().y, cball.getWorldPosition().z);
-    scene.add(ball);
-    ball.applyCentralImpulse(new THREE.Vector3(0, 0, BALL_IMPULSE_Z).applyEuler(new THREE.Euler(-angleYcannon, angleXcannon, 0)));
-
-    removeGUI();
-    cameraFollowsBall = true;
-
-    setTimeout(calcScore, 7500);
+function switchLTMC(){
+        tiltMoveSwitch= !tiltMoveSwitch;
 }
 
 function calcScore() {
