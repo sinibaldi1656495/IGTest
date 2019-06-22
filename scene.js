@@ -1023,7 +1023,7 @@ function initGUI() {
 	document.getElementById("topleft").innerHTML = "<input id='buttontopleft' class='button clickable smalltext centertext' type='button' value='Enable/disable music' onclick='switchMusic()'></input>";
 	document.getElementById("topright").innerHTML = "<button id='buttontopright' class='button clickable' onclick='addScore();'>Score: " + scoreTotal + "<div class='smalltext centertext'>Click for details</div></button>";
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-        document.getElementById("bottomleft").innerHTML = "<input id='switchCamera' class='button clickable centertext' type='button' value='Fire' onclick='fireBall()'></input>";
+        document.getElementById("bottomleft").innerHTML = "<input id='switchCamera' class='button clickable centertext' type='button' value='Fire test2' onclick='fireBall()'></input>";
     }
     else{
         document.getElementById("bottomleft").innerHTML = "<input id='switchCamera' class='button clickable smalltext centertext' type='button' value='Enable/disable free camera' onclick='switchCameraControl()'></input>";
