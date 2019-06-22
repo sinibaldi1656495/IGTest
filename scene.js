@@ -75,7 +75,7 @@ const PIN_WEIGHT = 1.5;
 const BALL_WEIGHT = 7;
 const BALL_IMPULSE_Z = 2000;
 
-const ANGLE_STEP_TOUCH = 0.0005;
+const ANGLE_STEP_TOUCH = 0.001;
 
 const REMOVER_SMALL_SIZE_X = GUTTER_SIZE_X / 2;
 const REMOVER_SMALL_WIDTH = 1;
@@ -120,6 +120,8 @@ const CROOT1_LENGTH = LANE_SIZE_X+C0_RADIUS_DOWN*2;
 var ccam, croot1, croot2, c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, cball;
 var angleXcannon = 0, angleYcannon = 0;
 var ballPosX;
+
+var listeningTouch = true;
 
 function initScene() {
 	window.addEventListener( 'resize', onWindowResize, false );
@@ -1025,7 +1027,7 @@ function initGUI() {
 	document.getElementById("topleft").innerHTML = "<input id='buttontopleft' class='button clickable smalltext centertext' type='button' value='Enable/disable music' onclick='switchMusic()'></input>";
 	document.getElementById("topright").innerHTML = "<button id='buttontopright' class='button clickable' onclick='addScore();'>Score: " + scoreTotal + "<div class='smalltext centertext'>Click for details</div></button>";
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-        document.getElementById("bottomleft").innerHTML = "<input id='switchCamera' class='button clickable centertext' type='button' value='Fire test3' onclick='fireBall()'></input>";
+        document.getElementById("bottomleft").innerHTML = "<input id='switchCamera' class='button clickable centertext' type='button' value='Fire test4' onclick='fireBall()'></input>";
     }
     else{
         document.getElementById("bottomleft").innerHTML = "<input id='switchCamera' class='button clickable smalltext centertext' type='button' value='Enable/disable free camera' onclick='switchCameraControl()'></input>";
@@ -1326,6 +1328,9 @@ function onDocumentKeyDown(event) {
 }
 
 function enableTouch(){
+
+    listeningTouch= true;
+
     var myElement = document.getElementById('canvas');
 
     // create a simple instance
@@ -1339,6 +1344,8 @@ function enableTouch(){
     // listen to events...
     mc.on("panleft panright panup pandown tap press", function(ev) {
         //myElement.textContent = ev.type +" gesture detected.";
+
+        if(listeningTouch){
 
             switch (""+ev.type) {
             case "panup":
@@ -1397,25 +1404,15 @@ function enableTouch(){
                 }
                 break;
             case "press":
+
+                listeningTouch= false;
+
                 croot1.updateMatrixWorld();
                 camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
                 camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
                 //document.removeEventListener("keydown", onDocumentKeyDown);
                 //hm-manager-options="{'touchAction':'none'}";
 
-                switch (""+ev.type) {
-                    case "panup":
-                        break;
-                    case "pandown":
-                        break;
-                    case "panleft":
-                        break;
-                    case "panright":
-                        break;
-                    case "tap":
-                        break;
-                    case "press":
-                }
 
                 scene.remove(ballStatic);
                 document.getElementById("shoot").play();
@@ -1437,29 +1434,21 @@ function enableTouch(){
                 setTimeout(calcScore, 7500);
 
         }
+    }
     });
 }
 
 function fireBall(){
+
+    listeningTouch= false;
+
     croot1.updateMatrixWorld();
     camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
     camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
     //document.removeEventListener("keydown", onDocumentKeyDown);
     //hm-manager-options="{'touchAction':'none'}";
 
-    switch (""+ev.type) {
-        case "panup":
-            break;
-        case "pandown":
-            break;
-        case "panleft":
-            break;
-        case "panright":
-            break;
-        case "tap":
-            break;
-        case "press":
-    }
+
 
     scene.remove(ballStatic);
     document.getElementById("shoot").play();
