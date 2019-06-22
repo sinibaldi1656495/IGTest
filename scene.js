@@ -1401,7 +1401,22 @@ function enableTouch(){
                 camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
                 camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
                 //document.removeEventListener("keydown", onDocumentKeyDown);
-                hm-manager-options="{'touchAction':'none'}"
+                //hm-manager-options="{'touchAction':'none'}";
+
+                switch (""+ev.type) {
+                    case "panup":
+                        break;
+                    case "pandown":
+                        break;
+                    case "panleft":
+                        break;
+                    case "panright":
+                        break;
+                    case "tap":
+                        break;
+                    case "press":
+                }
+
                 scene.remove(ballStatic);
                 document.getElementById("shoot").play();
 
@@ -1430,7 +1445,22 @@ function fireBall(){
     camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
     camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
     //document.removeEventListener("keydown", onDocumentKeyDown);
-    hm-manager-options="{'touchAction':'none'}"
+    //hm-manager-options="{'touchAction':'none'}";
+
+    switch (""+ev.type) {
+        case "panup":
+            break;
+        case "pandown":
+            break;
+        case "panleft":
+            break;
+        case "panright":
+            break;
+        case "tap":
+            break;
+        case "press":
+    }
+
     scene.remove(ballStatic);
     document.getElementById("shoot").play();
 
