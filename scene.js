@@ -1048,14 +1048,26 @@ function removeGUI() {
 }
 
 function addCommands() {
-	document.getElementById("bottomright").innerHTML = "<button disabled class='button'>CANNON CONTROLS" +
-		"<div class='smalltext'>W - tilt up</div>" +
-		"<div class='smalltext'>S - tilt down</div>" +
-		"<div class='smalltext'>A - move left</div>" +
-		"<div class='smalltext'>D - move right</div>" +
-		"<div class='smalltext'>Q - tilt left</div>" +
-		"<div class='smalltext'>E - tilt right</div>" +
-		"<div class='smalltext'>SPACE - launch</div></button>";
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+        document.getElementById("bottomright").innerHTML = "<button disabled class='button'>CANNON CONTROLS" +
+            "<div class='smalltext'>Swipe up - tilt up</div>" +
+            "<div class='smalltext'>Swipe down - tilt down</div>" +
+            "<div class='smalltext'>Switch on lateral move and swipe left - move left</div>" +
+            "<div class='smalltext'>Switch on lateral move and swipe right - move right</div>" +
+            "<div class='smalltext'>Switch on lateral tilt and swipe left - tilt left</div>" +
+            "<div class='smalltext'>Switch on lateral tilt and swipe right - tilt right</div>" +
+            "<div class='smalltext'>Long press - launch</div></button>";
+    }
+    else{
+        document.getElementById("bottomright").innerHTML = "<button disabled class='button'>CANNON CONTROLS" +
+            "<div class='smalltext'>W - tilt up</div>" +
+            "<div class='smalltext'>S - tilt down</div>" +
+            "<div class='smalltext'>A - move left</div>" +
+            "<div class='smalltext'>D - move right</div>" +
+            "<div class='smalltext'>Q - tilt left</div>" +
+            "<div class='smalltext'>E - tilt right</div>" +
+            "<div class='smalltext'>SPACE - launch</div></button>";
+    }
 }
 
 /*function addOptions() {
