@@ -75,6 +75,8 @@ const PIN_WEIGHT = 1.5;
 const BALL_WEIGHT = 7;
 const BALL_IMPULSE_Z = 2000;
 
+const ANGLE_STEP_TOUCH = 0.0005;
+
 const REMOVER_SMALL_SIZE_X = GUTTER_SIZE_X / 2;
 const REMOVER_SMALL_WIDTH = 1;
 const REMOVER_RADIUS = 2.5;
@@ -1023,7 +1025,7 @@ function initGUI() {
 	document.getElementById("topleft").innerHTML = "<input id='buttontopleft' class='button clickable smalltext centertext' type='button' value='Enable/disable music' onclick='switchMusic()'></input>";
 	document.getElementById("topright").innerHTML = "<button id='buttontopright' class='button clickable' onclick='addScore();'>Score: " + scoreTotal + "<div class='smalltext centertext'>Click for details</div></button>";
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-        document.getElementById("bottomleft").innerHTML = "<input id='switchCamera' class='button clickable centertext' type='button' value='Fire test2' onclick='fireBall()'></input>";
+        document.getElementById("bottomleft").innerHTML = "<input id='switchCamera' class='button clickable centertext' type='button' value='Fire test3' onclick='fireBall()'></input>";
     }
     else{
         document.getElementById("bottomleft").innerHTML = "<input id='switchCamera' class='button clickable smalltext centertext' type='button' value='Enable/disable free camera' onclick='switchCameraControl()'></input>";
@@ -1339,19 +1341,19 @@ function enableTouch(){
         //myElement.textContent = ev.type +" gesture detected.";
 
             switch (""+ev.type) {
-            case "panup": // W
+            case "panup":
                 if (angleYcannon <= MAX_Y_ANGLE_CANNON) {
-                    c6.rotateY(ANGLE_STEP);
-                    angleYcannon += ANGLE_STEP;
+                    c6.rotateY(ANGLE_STEP_TOUCH);
+                    angleYcannon += ANGLE_STEP_TOUCH;
                     croot1.updateMatrixWorld();
                     camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
                     camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
                 }
                 break;
-            case "pandown": // S
+            case "pandown":
                 if (angleYcannon >= MIN_Y_ANGLE_CANNON) {
-                    c6.rotateY(-ANGLE_STEP);
-                    angleYcannon -= ANGLE_STEP;
+                    c6.rotateY(-ANGLE_STEP_TOUCH);
+                    angleYcannon -= ANGLE_STEP_TOUCH;
                     croot1.updateMatrixWorld();
                     camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
                     camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
@@ -1375,30 +1377,31 @@ function enableTouch(){
                 }
 
                 break;*/
-            case "panleft": // Q
+            case "panleft":
                 if (angleXcannon <= MAX_X_ANGLE_CANNON) {
-                    c2.rotateY(ANGLE_STEP);
-                    angleXcannon += ANGLE_STEP;
+                    c2.rotateY(ANGLE_STEP_TOUCH);
+                    angleXcannon += ANGLE_STEP_TOUCH;
                     croot1.updateMatrixWorld();
                     camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
                     camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
                 }
 
                 break;
-            case "panright": // E
+            case "panright":
                 if (angleXcannon >= MIN_X_ANGLE_CANNON) {
-                    c2.rotateY(-ANGLE_STEP);
-                    angleXcannon -= ANGLE_STEP;
+                    c2.rotateY(-ANGLE_STEP_TOUCH);
+                    angleXcannon -= ANGLE_STEP_TOUCH;
                     croot1.updateMatrixWorld();
                     camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
                     camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
                 }
-                /*break;
-            case 32: // space
+                break;
+            case "press":
                 croot1.updateMatrixWorld();
                 camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
                 camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
-                document.removeEventListener("keydown", onDocumentKeyDown);
+                //document.removeEventListener("keydown", onDocumentKeyDown);
+                hm-manager-options="{'touchAction':'none'}"
                 scene.remove(ballStatic);
                 document.getElementById("shoot").play();
 
@@ -1416,7 +1419,7 @@ function enableTouch(){
                 removeGUI();
                 cameraFollowsBall = true;
 
-                setTimeout(calcScore, 7500);*/
+                setTimeout(calcScore, 7500);
 
         }
     });
@@ -1427,6 +1430,7 @@ function fireBall(){
     camera.position.set(ccam.getWorldPosition().x, ccam.getWorldPosition().y, ccam.getWorldPosition().z);
     camera.lookAt(new THREE.Vector3(c13.getWorldPosition().x, c13.getWorldPosition().y, c13.getWorldPosition().z));
     //document.removeEventListener("keydown", onDocumentKeyDown);
+    hm-manager-options="{'touchAction':'none'}"
     scene.remove(ballStatic);
     document.getElementById("shoot").play();
 
