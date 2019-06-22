@@ -1,0 +1,89 @@
+ body {
+	overflow: hidden;
+	font-family: courier;
+	font-weight: bold;
+	background-color: #252525;
+	background-image: url("../images/bowling.jpg");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size: 50vh ;
+	background-attachment: fixed;
+}
+
+#title {
+	color: #bcbcbc;
+	font-size: 10vmin;
+	text-align: center;
+	width: 100%;
+	margin: auto;
+}
+
+.ballimage {
+	width: 75px;
+	height: 75px;
+	cursor: pointer;
+}
+.ballimage:hover {
+	width: 90px;
+	height: 90px;
+}
+.ballimageclickactive {
+	width: 90px;
+	height: 90px;
+}
+.button {
+	background-color: #c3c6cb;
+	border-radius: 10px;
+	border-width: 4px;
+	border-color: #43464b;
+	color: #43464b;
+	width: 22vw;
+	min-height: 65px;
+	font-size: 2vw;
+	font-family: courier;
+}
+.bigbutton {
+	min-width: 40vw;
+	font-size: 3vw;
+}
+.centeredbutton {
+	width: 40vw;
+	font-size: 3vw;
+}
+.clickable:hover {
+	background-color: #43464b;
+	color: #c3c6cb;
+	cursor: pointer;
+}
+.clickablenb:hover {
+	cursor: pointer;
+}
+.clickactive {
+	background-color: #43464b;
+	color: #c3c6cb;
+}
+.clickactive:hover {
+	cursor: default;
+}
+.labelclickable {
+	cursor: pointer;
+}
+.smalltext {
+	font-size: 1vw;
+	text-align: left;
+}
+.centertext {
+	text-align: center;
+}
+#loading {
+	color: #bcbcbc;
+	font-size: 4vmin;
+}
+#center {
+	color: #bcbcbc;
+	font-size: 4vmin;
+}
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}

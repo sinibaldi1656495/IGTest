@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bowling Simulator</title>
+	<meta charset="utf-8"></meta>
+	<meta name="description" content="Un classico e divertente solitario bowling. Divertiti gratis e colpisci i birilli!">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/three.js"></script>
+	<script src="js/physi.js"></script>
+	<script src="js/OrbitControls.js"></script>
+</head>
+<body onload="initGame">
+	<script src="scene.js"></script>
+
+	<audio id="audio" src='music/song.mp3'></audio>
+  <audio id="audio" src='music/song.mp3'></audio>
+
+	<div id="title" style="position:absolute; top:5%">BOWLING SIMULATOR</div>
+	<div id="loading" style="position:absolute; bottom:5%; left:50%; transform:translateX(-50%)"></div>
+
+
+	<div id="canvas" style="position:absolute; top:0; left:0; right:0; bottom:0"></div>
+
+	<div id="topcenter" style="position:absolute; top:5px; left:50%; transform:translateX(-50%)"></div>
+	<div id="topleft" style="position:absolute; left:5px; top:5px"></div>
+	<div id="topright" style="position:absolute; right:5px; top:5px"></div>
+	<div id="bottomleft" style="position:absolute; left:5px; bottom:5px"></div>
+	<div id="bottomright" style="position:absolute; right:5px; bottom:5px"></div>
+	<div id="center" style="position: absolute;top: 50%;left: 50%;margin-right: -50%;transform: translate(-50%, -50%)"></div>
+
+
+	<div id="canvas" style="position:absolute; top:0; left:0; right:0; bottom:0"></div>
+
+</body>
+</html>
